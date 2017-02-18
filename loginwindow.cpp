@@ -1,8 +1,7 @@
 #include "loginwindow.h"
 #include "ui_loginwindow.h"
-#include <QDesktopWidget>
-#include <iostream>
-using namespace std;
+#include "keyboard.h"
+
 
 LoginWindow::LoginWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -10,12 +9,38 @@ LoginWindow::LoginWindow(QWidget *parent) :
 {
     ui->setupUi(this);
 
-QMainWindow::showFullScreen();
+    Keyboard *keyb = new Keyboard();
+    connect(keyb, &Keyboard::keyClicked,this, &LoginWindow::charPressed);
+    connect(keyb, &Keyboard::specialKeyClicked,this, &LoginWindow::specialPressed);
 
 
+
+    ui->keyboard = keyb;
+    ui->keyboard->show();
+    ui->mainLayout->addWidget(keyb,0,Qt::AlignCenter);
+
+
+    QLineEdit *username = ui->lineEdit;
+    QLineEdit *password = ui->lineEdit_2;
+
+
+
+
+
+    QMainWindow::showFullScreen();
 }
 
 LoginWindow::~LoginWindow()
 {
     delete ui;
+}
+
+
+void LoginWindow::charPressed(const QString &text) {
+
+}
+
+
+void LoginWindow::specialPressed(int key) {
+
 }

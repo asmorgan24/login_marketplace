@@ -24,8 +24,10 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 
 SOURCES += main.cpp\
-        loginwindow.cpp
+        loginwindow.cpp \
+    keyboard.cpp
 
-HEADERS  += loginwindow.h
+HEADERS  += loginwindow.h \
+    keyboard.h
 
 FORMS    += loginwindow.ui

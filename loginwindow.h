@@ -17,6 +17,12 @@ public:
 
 private:
     Ui::LoginWindow *ui;
+
+public slots:
+    void charPressed(const QString &text);
+    void specialPressed(int key);
+
+
 };
 
 #endif // LOGINWINDOW_H
