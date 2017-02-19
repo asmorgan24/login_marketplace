@@ -1,6 +1,12 @@
+#include <QtGamepad/QtGamepad>
+
 #include "loginwindow.h"
 #include "ui_loginwindow.h"
 #include "keyboard.h"
+
+#include <iostream>
+using namespace std;
+
 
 
 LoginWindow::LoginWindow(QWidget *parent) :
@@ -9,25 +15,34 @@ LoginWindow::LoginWindow(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    Keyboard *keyb = new Keyboard();
+    keyb = new Keyboard();
+
     connect(keyb, &Keyboard::keyClicked,this, &LoginWindow::charPressed);
     connect(keyb, &Keyboard::specialKeyClicked,this, &LoginWindow::specialPressed);
 
 
+    ic = new InputController(keyb);
 
     ui->keyboard = keyb;
     ui->keyboard->show();
     ui->mainLayout->addWidget(keyb,0,Qt::AlignCenter);
 
+    username = ui->lineEdit_2;
+    password = ui->lineEdit;
+    cursor = new QCursor();
 
-    QLineEdit *username = ui->lineEdit;
-    QLineEdit *password = ui->lineEdit_2;
 
+    palBlue, palWhite = palette();
+    palBlue.setColor(QPalette::Background, Qt::blue);
+    palWhite.setColor(QPalette::Background, Qt::white);
+    username->setPalette(palBlue);
 
 
 
 
     QMainWindow::showFullScreen();
+
+    ic->anything();
 }
 
 LoginWindow::~LoginWindow()
@@ -37,10 +52,36 @@ LoginWindow::~LoginWindow()
 
 
 void LoginWindow::charPressed(const QString &text) {
-
+    if(!enterPressed) {
+        username->setText(username->text()+text);
+        //cout << cursor->pos().x()<< endl;
+    }
+    else if (enterPressed) {
+        password->setText(password->text()+text);
+    }
 }
 
 
-void LoginWindow::specialPressed(int key) {
+void LoginWindow::specialPressed (int key) {
 
+    if (key == Qt::Key_Enter && !enterPressed){
+        enterPressed = true;
+        username->setDisabled(true);
+        username->setPalette(palWhite);
+        password->setPalette(palBlue);
+    }
+    else if (key == Qt::Key_Enter && enterPressed) {
+        password->setPalette(palWhite);
+        password->setDisabled(true);
+    }
+    if (key == Qt::Key_Backspace && !enterPressed){
+        QString text = username->text();
+        text.chop(1);
+        username->setText(text);
+    }
+    else if (key == Qt::Key_Backspace && enterPressed) {
+        QString text = password->text();
+        text.chop(1);
+        password->setText(text);
+    }
 }

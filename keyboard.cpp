@@ -31,7 +31,7 @@ KeyboardLayoutEntry keyboardLayout[] = {
     { Qt::Key_E, "e" },
     { Qt::Key_R, "r" },
     { Qt::Key_T, "t" },
-    { Qt::Key_Z, "z" },
+    { Qt::Key_Y, "y" },
     { Qt::Key_U, "u" },
     { Qt::Key_I, "i" },
     { Qt::Key_O, "o" },
@@ -47,7 +47,7 @@ KeyboardLayoutEntry keyboardLayout[] = {
     { Qt::Key_K, "k" },
     { Qt::Key_L, "l" },
     { NEXT_ROW_MARKER, 0 },
-    { Qt::Key_Y, "y" },
+    { Qt::Key_Z, "z" },
     { Qt::Key_X, "x" },
     { Qt::Key_C, "c" },
     { Qt::Key_V, "v" },
@@ -75,6 +75,8 @@ Keyboard::Keyboard(QWidget *parent)
     setWindowFlags(Qt::WindowDoesNotAcceptFocus | Qt::Tool | Qt::FramelessWindowHint | Qt::WindowStaysOnTopHint | Qt::BypassWindowManagerHint);
 
     QGridLayout *gridLayout = new QGridLayout(this);
+    blue.setColor(QPalette::Background, Qt::blue);
+    white.setColor(QPalette::Background, Qt::white);
 
     QSignalMapper *mapper = new QSignalMapper(this);
     connect(mapper, SIGNAL(mapped(int)), SLOT(buttonClicked(int)));
@@ -84,10 +86,10 @@ Keyboard::Keyboard(QWidget *parent)
 
     QDesktopWidget desktop;
 
-
     for (int i = 0; i < layoutSize; ++i) {
         if (keyboardLayout[i].key == NEXT_ROW_MARKER) {
             row++;
+            rowLengths.push_back(column);
             column = 0;
             continue;
         }
@@ -96,13 +98,15 @@ Keyboard::Keyboard(QWidget *parent)
         button->setFixedWidth(desktop.width()/13);
         button->setFixedHeight(80);
         button->setText(QString::fromLatin1(keyboardLayout[i].label));
+        button->setFocusPolicy(Qt::FocusPolicy::NoFocus);
 
         mapper->setMapping(button, keyboardLayout[i].key);
         connect(button, SIGNAL(clicked()), mapper, SLOT(map()));
-
+        buttonVec.push_back(button);
         gridLayout->addWidget(button, row, column);
         column++;
     }
+    buttonVec.at(position)->setPalette(blue);
 }
 
 void Keyboard::showKeyboard()
@@ -120,14 +124,84 @@ bool Keyboard::keyboardVisible() const
     return QWidget::isVisible();
 }
 
+
+void Keyboard::up(){
+    buttonVec.at(position)->setPalette(white);
+    position = position-rowLengths.at(getRow()-1);
+    if (position < 0) {
+        position = 0;
+    }
+    buttonVec.at(position)->setPalette(blue);
+
+}
+
+void Keyboard::down(){
+    buttonVec.at(position)->setPalette(white);
+    position = position+rowLengths.at(getRow());
+    if (position > buttonVec.length()) {
+        position = buttonVec.length();
+    }
+    buttonVec.at(position)->setPalette(blue);
+
+}
+
+void Keyboard::right(){
+    buttonVec.at(position)->setPalette(white);
+    position++;
+    if (position > buttonVec.length()) {
+        position = buttonVec.length();
+    }
+    buttonVec.at(position)->setPalette(blue);
+
+}
+
+void Keyboard::left(){
+    buttonVec.at(position)->setPalette(white);
+    position--;
+    if (position < 0) {
+        position = 0;
+    }
+    buttonVec.at(position)->setPalette(blue);
+
+
+}
+
+void Keyboard::select(){
+
+    if (buttonVec.at(position)->text().toStdString() == "Enter" || buttonVec.at(position)->text().toStdString() == "<-") {
+        emit specialKeyClicked(keyboardLayout[position+getRow()].key);
+    }
+    else {
+        emit keyClicked(keyToCharacter(keyboardLayout[position+getRow()].key));
+    }
+
+}
+
+/**
+ * @brief Keyboard::getRow
+ * @return zero based index of current row based on position variable
+ */
+int Keyboard::getRow() const {
+    int tmpPosition = position;
+    int row = -1;
+
+    for (QVector<int>::const_iterator it = rowLengths.begin(); it != rowLengths.end() && tmpPosition >= 0; ++it) {
+        tmpPosition -= *it;
+        row++;
+    }
+
+    return row >= 0 ? row : 0;
+}
+
+
+
 void Keyboard::buttonClicked(int key)
 {
     if ((key == Qt::Key_Enter) || (key == Qt::Key_Backspace)) {
         emit specialKeyClicked(key);
-        std::cout << key << std::endl;
     }
     else {
         emit keyClicked(keyToCharacter(key));
-        std::cout << keyToCharacter(key).toStdString() << std::endl;
     }
 }
+

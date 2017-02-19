@@ -3,6 +3,7 @@
 
 #include <QWidget>
 #include <qwidget.h>
+#include <QPushButton>
 
 class Keyboard : public QWidget
 {
@@ -10,6 +11,20 @@ class Keyboard : public QWidget
 
 public:
     explicit Keyboard(QWidget *parent = Q_NULLPTR);
+    void up();
+    void down();
+    void left();
+    void right();
+    void select();
+
+
+private:
+    QVector <QPushButton*> buttonVec;
+    QVector <int> rowLengths;
+    QPalette white;
+    QPalette blue;
+    int position = 0;
+    int getRow() const;
 
 public slots:
     void showKeyboard();

@@ -25,9 +25,13 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += main.cpp\
         loginwindow.cpp \
-    keyboard.cpp
+    keyboard.cpp \
+    inputcontroller.cpp
 
 HEADERS  += loginwindow.h \
-    keyboard.h
+    keyboard.h \
+    inputcontroller.h
 
 FORMS    += loginwindow.ui
+
+QT += gamepad
