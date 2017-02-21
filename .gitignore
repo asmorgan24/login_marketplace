@@ -41,3 +41,5 @@ Makefile
 
 #Qt
 .user
+
+login_marketplace\.pro\.user
