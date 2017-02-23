@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6"/>
+	<Project>
+		<Option title="pugixml"/>
+		<Option makefile_is_custom="1"/>
+		<Option compiler="gcc"/>
+		<Option virtualFolders="CMake Files\;CMake Files\es-core\;CMake Files\es-app\;CMake Files\CMake\;CMake Files\CMake\Packages\;CMake Files\CMake\Utils\;CMake Files\external\;CMake Files\external\nanosvg\;CMake Files\external\pugixml\;"/>
+		<Build>
+			<Target title="all">
+				<Option working_dir="/home/andy/workspace/EmulationStation/external/pugixml"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -f &quot;/home/andy/workspace/EmulationStation/external/pugixml/Makefile&quot;  VERBOSE=1 all"/>
+					<CompileFile command="/usr/bin/make -f &quot;/home/andy/workspace/EmulationStation/external/pugixml/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -f &quot;/home/andy/workspace/EmulationStation/external/pugixml/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -f &quot;/home/andy/workspace/EmulationStation/external/pugixml/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="pugixml">
+				<Option output="/home/andy/workspace/EmulationStation/libpugixml.a" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/andy/workspace/EmulationStation/external/pugixml"/>
+				<Option object_output="./"/>
+				<Option type="2"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add option="-DUSE_OPENGL_DESKTOP"/>
+					<Add option="-DEIGEN_DONT_ALIGN"/>
+					<Add directory="/home/andy/workspace/EmulationStation/external/pugixml"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/5/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+					<Add directory="/usr/include/c++/5"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/5"/>
+					<Add directory="/usr/include/c++/5/backward"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -f &quot;/home/andy/workspace/EmulationStation/external/pugixml/Makefile&quot;  VERBOSE=1 pugixml"/>
+					<CompileFile command="/usr/bin/make -f &quot;/home/andy/workspace/EmulationStation/external/pugixml/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -f &quot;/home/andy/workspace/EmulationStation/external/pugixml/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -f &quot;/home/andy/workspace/EmulationStation/external/pugixml/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="pugixml/fast">
+				<Option output="/home/andy/workspace/EmulationStation/libpugixml.a" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/andy/workspace/EmulationStation/external/pugixml"/>
+				<Option object_output="./"/>
+				<Option type="2"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add option="-DUSE_OPENGL_DESKTOP"/>
+					<Add option="-DEIGEN_DONT_ALIGN"/>
+					<Add directory="/home/andy/workspace/EmulationStation/external/pugixml"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/5/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+					<Add directory="/usr/include/c++/5"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/5"/>
+					<Add directory="/usr/include/c++/5/backward"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -f &quot;/home/andy/workspace/EmulationStation/external/pugixml/Makefile&quot;  VERBOSE=1 pugixml/fast"/>
+					<CompileFile command="/usr/bin/make -f &quot;/home/andy/workspace/EmulationStation/external/pugixml/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -f &quot;/home/andy/workspace/EmulationStation/external/pugixml/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -f &quot;/home/andy/workspace/EmulationStation/external/pugixml/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+		</Build>
+		<Unit filename="/home/andy/workspace/EmulationStation/external/pugixml/src/pugixml.cpp">
+			<Option target="pugixml"/>
+		</Unit>
+		<Unit filename="/home/andy/workspace/EmulationStation/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\"/>
+		</Unit>
+		<Unit filename="/home/andy/workspace/EmulationStation/es-core/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\es-core\"/>
+		</Unit>
+		<Unit filename="/home/andy/workspace/EmulationStation/es-core/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\es-core\"/>
+		</Unit>
+		<Unit filename="/home/andy/workspace/EmulationStation/es-app/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\es-app\"/>
+		</Unit>
+		<Unit filename="/home/andy/workspace/EmulationStation/es-app/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\es-app\"/>
+		</Unit>
+		<Unit filename="/home/andy/workspace/EmulationStation/CMake/Packages/FindFreeImage.cmake">
+			<Option virtualFolder="CMake Files\CMake\Packages\"/>
+		</Unit>
+		<Unit filename="/home/andy/workspace/EmulationStation/CMake/Packages/FindSDL2.cmake">
+			<Option virtualFolder="CMake Files\CMake\Packages\"/>
+		</Unit>
+		<Unit filename="/home/andy/workspace/EmulationStation/CMake/Packages/FindEigen3.cmake">
+			<Option virtualFolder="CMake Files\CMake\Packages\"/>
+		</Unit>
+		<Unit filename="/home/andy/workspace/EmulationStation/CMake/Packages/FindVLC.cmake">
+			<Option virtualFolder="CMake Files\CMake\Packages\"/>
+		</Unit>
+		<Unit filename="/home/andy/workspace/EmulationStation/CMake/Packages/MacroEnsureVersion.cmake">
+			<Option virtualFolder="CMake Files\CMake\Packages\"/>
+		</Unit>
+		<Unit filename="/home/andy/workspace/EmulationStation/CMake/Utils/FindPkgMacros.cmake">
+			<Option virtualFolder="CMake Files\CMake\Utils\"/>
+		</Unit>
+		<Unit filename="/home/andy/workspace/EmulationStation/external/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\external\"/>
+		</Unit>
+		<Unit filename="/home/andy/workspace/EmulationStation/external/nanosvg/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\external\nanosvg\"/>
+		</Unit>
+		<Unit filename="/home/andy/workspace/EmulationStation/external/nanosvg/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\external\nanosvg\"/>
+		</Unit>
+		<Unit filename="/home/andy/workspace/EmulationStation/external/pugixml/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\external\pugixml\"/>
+		</Unit>
+		<Unit filename="/home/andy/workspace/EmulationStation/external/pugixml/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\external\pugixml\"/>
+		</Unit>
+	</Project>
+</CodeBlocks_project_file>

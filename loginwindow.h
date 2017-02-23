@@ -4,7 +4,8 @@
 
 #include <QMainWindow>
 #include "keyboard.h"
-#include "inputcontroller.h"
+#include "inputcontrollerOrig.h"
+#include "InputManager.h"
 
 namespace Ui {
 class LoginWindow;
@@ -27,8 +28,8 @@ private:
     QCursor *cursor;
 
     Keyboard *keyb;
-    InputController *ic;
-
+    //InputController *ic;
+    InputManager *im;
     bool enterPressed = false;
 
 public slots:

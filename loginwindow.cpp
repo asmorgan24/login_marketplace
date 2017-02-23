@@ -20,8 +20,10 @@ LoginWindow::LoginWindow(QWidget *parent) :
     connect(keyb, &Keyboard::keyClicked,this, &LoginWindow::charPressed);
     connect(keyb, &Keyboard::specialKeyClicked,this, &LoginWindow::specialPressed);
 
+    im->getInstance();
+    im->init();
 
-    ic = new InputController(keyb);
+
 
     ui->keyboard = keyb;
     ui->keyboard->show();
@@ -32,17 +34,18 @@ LoginWindow::LoginWindow(QWidget *parent) :
     cursor = new QCursor();
 
 
-    palBlue, palWhite = palette();
+    palBlue= palette();
+    palWhite = palette();
     palBlue.setColor(QPalette::Background, Qt::blue);
     palWhite.setColor(QPalette::Background, Qt::white);
     username->setPalette(palBlue);
 
 
-
-
     QMainWindow::showFullScreen();
 
-    ic->anything();
+
+    //im->init();
+    //ic->anything();
 }
 
 LoginWindow::~LoginWindow()
@@ -54,7 +57,6 @@ LoginWindow::~LoginWindow()
 void LoginWindow::charPressed(const QString &text) {
     if(!enterPressed) {
         username->setText(username->text()+text);
-        //cout << cursor->pos().x()<< endl;
     }
     else if (enterPressed) {
         password->setText(password->text()+text);
@@ -74,6 +76,7 @@ void LoginWindow::specialPressed (int key) {
         password->setPalette(palWhite);
         password->setDisabled(true);
     }
+
     if (key == Qt::Key_Backspace && !enterPressed){
         QString text = username->text();
         text.chop(1);

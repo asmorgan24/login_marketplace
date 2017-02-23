@@ -26,12 +26,27 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += main.cpp\
         loginwindow.cpp \
     keyboard.cpp \
-    inputcontroller.cpp
+    inputcontrollerOrig.cpp \
+    InputConfig.cpp \
+    InputManager.cpp \
+    platform.cpp \
+    pugixml.cpp
 
 HEADERS  += loginwindow.h \
     keyboard.h \
-    inputcontroller.h
+    inputcontrollerOrig.h \
+    InputConfig.h \
+    InputManager.h \
+    platform.h
 
 FORMS    += loginwindow.ui
 
+LIBS += -L/usr/local/include/SDL2 -lSDL2
+LIBS+= -lboost_system
+
+CONFIG += c++17
+
+
 QT += gamepad
+
+-DBOOST_NO_CXX11_SCOPED_ENUMS

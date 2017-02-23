@@ -96,7 +96,7 @@ Keyboard::Keyboard(QWidget *parent)
 
         QPushButton *button = new QPushButton;
         button->setFixedWidth(desktop.width()/13);
-        button->setFixedHeight(80);
+        button->setFixedHeight(desktop.height()/2/6);
         button->setText(QString::fromLatin1(keyboardLayout[i].label));
         button->setFocusPolicy(Qt::FocusPolicy::NoFocus);
 
@@ -192,7 +192,6 @@ int Keyboard::getRow() const {
 
     return row >= 0 ? row : 0;
 }
-
 
 
 void Keyboard::buttonClicked(int key)

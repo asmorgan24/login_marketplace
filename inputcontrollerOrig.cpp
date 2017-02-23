@@ -1,4 +1,4 @@
-#include "inputcontroller.h"
+#include "inputcontrollerOrig.h"
 #include "loginwindow.h"
 #include "iostream"
 
