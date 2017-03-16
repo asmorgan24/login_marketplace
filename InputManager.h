@@ -7,6 +7,7 @@
 #include "SDL2/SDL.h"
 
 
+
 class InputConfig;
 
 
@@ -24,7 +25,7 @@ private:
 
 	std::map<SDL_JoystickID, SDL_Joystick*> mJoysticks;
 	std::map<SDL_JoystickID, InputConfig*> mInputConfigs;
-	InputConfig* mKeyboardInputConfig;
+    InputConfig* mKeyboardInputConfig = NULL;
 
 	std::map<SDL_JoystickID, int*> mPrevAxisValues;
 
@@ -44,7 +45,7 @@ public:
 	static std::string getConfigPath();
 	static std::string getTemporaryConfigPath();
 
-	void init();
+    void init();
 	void deinit();
 
 	int getNumJoysticks();
@@ -55,7 +56,7 @@ public:
 
 	InputConfig* getInputConfigByDevice(int deviceId);
 
-    bool parseEvent(const SDL_Event& ev);
+    std::vector <std::string> parseEvent(const SDL_Event& ev);
 };
 
 #endif

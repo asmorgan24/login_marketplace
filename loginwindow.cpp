@@ -3,11 +3,38 @@
 #include "loginwindow.h"
 #include "ui_loginwindow.h"
 #include "keyboard.h"
+#include "pugixml.hpp"
+#include "InputConfig.h"
+#include <thread>
 
 #include <iostream>
 using namespace std;
 
-
+void LoginWindow::poll() {
+    SDL_Event event;
+    std::vector<std::string> data;
+    while(SDL_PollEvent(&event))
+    {
+        std::cout << "got in here" <<std::endl;
+        switch(event.type)
+        {
+            case SDL_JOYHATMOTION:
+            case SDL_JOYBUTTONDOWN:
+            case SDL_JOYBUTTONUP:
+            case SDL_KEYDOWN:
+            case SDL_KEYUP:
+            case SDL_JOYAXISMOTION:
+            case SDL_TEXTINPUT:
+            case SDL_TEXTEDITING:
+            case SDL_JOYDEVICEADDED:
+            case SDL_JOYDEVICEREMOVED:
+                data = InputManager::getInstance()->parseEvent(event);
+                break;
+            //Save that shit into a vector, then call the handleInput Function
+        }
+        handleInput(data);
+    }
+}
 
 LoginWindow::LoginWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -20,8 +47,9 @@ LoginWindow::LoginWindow(QWidget *parent) :
     connect(keyb, &Keyboard::keyClicked,this, &LoginWindow::charPressed);
     connect(keyb, &Keyboard::specialKeyClicked,this, &LoginWindow::specialPressed);
 
-    im->getInstance();
+    im = InputManager::getInstance();
     im->init();
+
 
 
 
@@ -44,13 +72,43 @@ LoginWindow::LoginWindow(QWidget *parent) :
     QMainWindow::showFullScreen();
 
 
+
     //im->init();
     //ic->anything();
+
+
+
 }
 
 LoginWindow::~LoginWindow()
 {
     delete ui;
+}
+
+void LoginWindow::handleInput(std::vector<std::string> inputs) {
+
+
+    for(std::vector<string>::iterator it = inputs.begin(); it!=inputs.end(); ++it) {
+        if(*it == "up") {
+            std::cout << "we got in here ooh yeah" << std::endl;
+        }
+        else if (*it == "down") {
+            std::cout << "we got in here ooh yeah" << std::endl;
+        }
+        else if (*it == "left") {
+            std::cout << "we got in here ooh yeah" << std::endl;
+        }
+        else if (*it == "right") {
+            std::cout << "we got in here ooh yeah" << std::endl;
+        }
+        else if (*it == "a") {
+            std::cout << "we got in here ooh yeah" << std::endl;
+        }
+
+
+    }
+
+
 }
 
 

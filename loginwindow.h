@@ -6,6 +6,7 @@
 #include "keyboard.h"
 #include "inputcontrollerOrig.h"
 #include "InputManager.h"
+#include "InputConfig.h"
 
 namespace Ui {
 class LoginWindow;
@@ -18,6 +19,7 @@ class LoginWindow : public QMainWindow
 public:
     explicit LoginWindow(QWidget *parent = 0);
 
+
     ~LoginWindow();
 
 private:
@@ -28,13 +30,21 @@ private:
     QCursor *cursor;
 
     Keyboard *keyb;
-    //InputController *ic;
+    InputController *ic;
     InputManager *im;
     bool enterPressed = false;
+
+
+    void poll();
+
+
+
+
 
 public slots:
     void charPressed(const QString &text);
     void specialPressed(int key);
+    void handleInput(std::vector<std::string> inputs);
 
 
 };
