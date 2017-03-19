@@ -6,35 +6,11 @@
 #include "pugixml.hpp"
 #include "InputConfig.h"
 #include <thread>
+#include "devicepoller.h"
 
 #include <iostream>
 using namespace std;
 
-void LoginWindow::poll() {
-    SDL_Event event;
-    std::vector<std::string> data;
-    while(SDL_PollEvent(&event))
-    {
-        std::cout << "got in here" <<std::endl;
-        switch(event.type)
-        {
-            case SDL_JOYHATMOTION:
-            case SDL_JOYBUTTONDOWN:
-            case SDL_JOYBUTTONUP:
-            case SDL_KEYDOWN:
-            case SDL_KEYUP:
-            case SDL_JOYAXISMOTION:
-            case SDL_TEXTINPUT:
-            case SDL_TEXTEDITING:
-            case SDL_JOYDEVICEADDED:
-            case SDL_JOYDEVICEREMOVED:
-                data = InputManager::getInstance()->parseEvent(event);
-                break;
-            //Save that shit into a vector, then call the handleInput Function
-        }
-        handleInput(data);
-    }
-}
 
 LoginWindow::LoginWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -49,8 +25,6 @@ LoginWindow::LoginWindow(QWidget *parent) :
 
     im = InputManager::getInstance();
     im->init();
-
-
 
 
     ui->keyboard = keyb;
@@ -72,10 +46,16 @@ LoginWindow::LoginWindow(QWidget *parent) :
     QMainWindow::showFullScreen();
 
 
+    DevicePoller *devicePoller = new DevicePoller();
+    devicePoller->moveToThread(&pollThread);
+    connect (devicePoller,&DevicePoller::keyPressed,this, &LoginWindow::handleInput);
+    connect (this, &LoginWindow::poll, devicePoller, &DevicePoller::doin);
+    connect (&pollThread, &QThread::finished, devicePoller, &QObject::deleteLater);
+    connect (&pollThread, &QThread::started, devicePoller, &DevicePoller::doin);
 
-    //im->init();
-    //ic->anything();
 
+    emit poll();
+    pollThread.start();
 
 
 }
@@ -86,8 +66,6 @@ LoginWindow::~LoginWindow()
 }
 
 void LoginWindow::handleInput(std::vector<std::string> inputs) {
-
-
     for(std::vector<string>::iterator it = inputs.begin(); it!=inputs.end(); ++it) {
         if(*it == "up") {
             std::cout << "we got in here ooh yeah" << std::endl;
@@ -104,7 +82,6 @@ void LoginWindow::handleInput(std::vector<std::string> inputs) {
         else if (*it == "a") {
             std::cout << "we got in here ooh yeah" << std::endl;
         }
-
 
     }
 

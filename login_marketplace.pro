@@ -26,18 +26,20 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += main.cpp\
         loginwindow.cpp \
     keyboard.cpp \
-    inputcontrollerOrig.cpp \
     InputConfig.cpp \
     InputManager.cpp \
     platform.cpp \
-    pugixml.cpp
+    pugixml.cpp \
+    devicepoller.cpp \
+    keyboardInputController.cpp
 
 HEADERS  += loginwindow.h \
     keyboard.h \
-    inputcontrollerOrig.h \
     InputConfig.h \
     InputManager.h \
-    platform.h
+    platform.h \
+    devicepoller.h \
+    keyboardInputController.h
 
 FORMS    += loginwindow.ui
 

@@ -4,9 +4,10 @@
 
 #include <QMainWindow>
 #include "keyboard.h"
-#include "inputcontrollerOrig.h"
+#include "keyboardInputController.h"
 #include "InputManager.h"
 #include "InputConfig.h"
+#include "QThread"
 
 namespace Ui {
 class LoginWindow;
@@ -34,11 +35,10 @@ private:
     InputManager *im;
     bool enterPressed = false;
 
+    QThread pollThread;
 
+signals:
     void poll();
-
-
-
 
 
 public slots:
