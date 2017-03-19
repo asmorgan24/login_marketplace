@@ -59,7 +59,7 @@ void InputManager::init()
             deinit();
 
         SDL_SetHint(SDL_HINT_JOYSTICK_ALLOW_BACKGROUND_EVENTS,"1");
-        SDL_InitSubSystem(SDL_INIT_JOYSTICK);
+        SDL_Init(SDL_INIT_JOYSTICK);
         SDL_JoystickEventState(SDL_ENABLE);
 
         // first, open all currently present joysticks
