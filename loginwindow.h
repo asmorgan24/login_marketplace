@@ -44,7 +44,7 @@ signals:
 public slots:
     void charPressed(const QString &text);
     void specialPressed(int key);
-    void handleInput(std::vector<std::string> inputs);
+    void handleInput(QVector<std::string> inputs);
 
 
 };

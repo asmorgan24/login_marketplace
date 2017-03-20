@@ -13,11 +13,11 @@ DevicePoller::DevicePoller(QObject *parent) : QObject(parent)
 void DevicePoller::doin() {
     while (true) {
         SDL_Event event;
-        std::vector<std::string> data;
+        QVector<std::string> data;
 
         while(SDL_PollEvent(&event))
 
-            std::cout << "got in here" <<std::endl;
+            std::cout << "got in here " << std::endl;
             switch(event.type)
             {
                 case SDL_JOYHATMOTION:

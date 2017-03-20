@@ -2,12 +2,12 @@
 #define _INPUTCONFIG_H_
 
 #include <map>
-#include <vector>
 #include <string>
 #include <sstream>
 #include "pugixml.hpp"
 #include "pugiconfig.hpp"
 #include "SDL2/SDL.h"
+#include <QVector>
 
 
 
@@ -100,7 +100,7 @@ public:
 	bool isMappedTo(const std::string& name, Input input);
 
 	//Returns a list of names this input is mapped to.
-	std::vector<std::string> getMappedTo(Input input);
+    QVector<std::string> getMappedTo(Input input);
 
 	void loadFromXML(pugi::xml_node root);
 	void writeToXML(pugi::xml_node parent);

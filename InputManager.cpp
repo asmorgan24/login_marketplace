@@ -7,6 +7,7 @@
 #include <iostream>
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_hints.h>
+#include <QVector>
 
 
 
@@ -59,7 +60,10 @@ void InputManager::init()
             deinit();
 
         SDL_SetHint(SDL_HINT_JOYSTICK_ALLOW_BACKGROUND_EVENTS,"1");
-        SDL_Init(SDL_INIT_JOYSTICK);
+        if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_JOYSTICK | SDL_INIT_EVENTS | SDL_INIT_EVERYTHING) < 0) {
+                fprintf(stderr, "Couldn't initialize SDL: %s\n", SDL_GetError());
+        }
+        printf("There are %d joysticks attached\n", SDL_NumJoysticks());
         SDL_JoystickEventState(SDL_ENABLE);
 
         // first, open all currently present joysticks
@@ -161,9 +165,9 @@ InputConfig* InputManager::getInputConfigByDevice(int device)
 		return mInputConfigs[device];
 }
 
-std::vector <std::string> InputManager::parseEvent(const SDL_Event& ev)
+QVector<std::string> InputManager::parseEvent(const SDL_Event& ev)
 {
-    std::vector <std::string> empty;
+    QVector<std::string> empty;
         switch(ev.type)
         {
         case SDL_JOYAXISMOTION:

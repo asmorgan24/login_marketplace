@@ -3,6 +3,7 @@
 #include <algorithm>
 #include <iostream>
 #include "InputManager.h"
+#include <QVector>
 
 
 //some util functions
@@ -109,9 +110,9 @@ bool InputConfig::isMappedTo(const std::string& name, Input input)
 	return false;
 }
 
-std::vector<std::string> InputConfig::getMappedTo(Input input)
+QVector<std::string> InputConfig::getMappedTo(Input input)
 {
-	std::vector<std::string> maps;
+    QVector<std::string> maps;
 
 	typedef std::map<std::string, Input>::iterator it_type;
 	for(it_type iterator = mNameMap.begin(); iterator != mNameMap.end(); iterator++)

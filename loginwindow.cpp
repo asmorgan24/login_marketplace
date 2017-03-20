@@ -65,8 +65,8 @@ LoginWindow::~LoginWindow()
     delete ui;
 }
 
-void LoginWindow::handleInput(std::vector<std::string> inputs) {
-    for(std::vector<string>::iterator it = inputs.begin(); it!=inputs.end(); ++it) {
+void LoginWindow::handleInput(QVector<std::string> inputs) {
+    for(QVector<string>::iterator it = inputs.begin(); it!=inputs.end(); ++it) {
         if(*it == "up") {
             std::cout << "we got in here ooh yeah" << std::endl;
         }

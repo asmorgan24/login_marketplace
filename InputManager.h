@@ -1,11 +1,10 @@
 #ifndef _INPUTMANAGER_H_
 #define _INPUTMANAGER_H_
 
-#include <vector>
 #include <map>
 #include <string>
 #include "SDL2/SDL.h"
-
+#include <QVector>
 
 
 class InputConfig;
@@ -56,7 +55,7 @@ public:
 
 	InputConfig* getInputConfigByDevice(int deviceId);
 
-    std::vector <std::string> parseEvent(const SDL_Event& ev);
+    QVector<std::string> parseEvent(const SDL_Event& ev);
 };
 
 #endif
