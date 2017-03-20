@@ -110,9 +110,9 @@ bool InputConfig::isMappedTo(const std::string& name, Input input)
 	return false;
 }
 
-QVector<std::string> InputConfig::getMappedTo(Input input)
+std::vector<std::string> InputConfig::getMappedTo(Input input)
 {
-    QVector<std::string> maps;
+    std::vector<std::string> maps;
 
 	typedef std::map<std::string, Input>::iterator it_type;
 	for(it_type iterator = mNameMap.begin(); iterator != mNameMap.end(); iterator++)
@@ -128,7 +128,7 @@ QVector<std::string> InputConfig::getMappedTo(Input input)
 			{
 				if(input.value == 0 || input.value & chk.value)
 				{
-					maps.push_back(iterator->first);
+                    maps.push_back(iterator->first);
 				}
 				continue;
 			}
@@ -136,9 +136,9 @@ QVector<std::string> InputConfig::getMappedTo(Input input)
 			if(input.type == TYPE_AXIS)
 			{
 				if(input.value == 0 || chk.value == input.value)
-					maps.push_back(iterator->first);
+                    maps.push_back(iterator->first);
 			}else{
-				maps.push_back(iterator->first);
+                maps.push_back(iterator->first);
 			}
 		}
 	}
@@ -165,8 +165,9 @@ void InputConfig::loadFromXML(pugi::xml_node node)
 		int id = input.attribute("id").as_int();
 		int value = input.attribute("value").as_int();
 
-		if(value == 0)
+        if(value == 0) {
             //LOG(LogWarning) << "WARNING: InputConfig value is 0 for " << type << " " << id << "!\n";
+        }
 
 		mNameMap[toLower(name)] = Input(mDeviceId, typeEnum, id, value, true);
 	}

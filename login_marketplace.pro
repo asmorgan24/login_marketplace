@@ -39,7 +39,8 @@ HEADERS  += loginwindow.h \
     InputManager.h \
     platform.h \
     devicepoller.h \
-    keyboardInputController.h
+    keyboardInputController.h \
+    vectortypedef.h
 
 FORMS    += loginwindow.ui
 

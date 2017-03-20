@@ -7,6 +7,7 @@
 #include "InputConfig.h"
 #include <thread>
 #include "devicepoller.h"
+#include "vectortypedef.h"
 
 #include <iostream>
 using namespace std;
@@ -48,6 +49,9 @@ LoginWindow::LoginWindow(QWidget *parent) :
 
     DevicePoller *devicePoller = new DevicePoller();
     devicePoller->moveToThread(&pollThread);
+
+    qRegisterMetaType<StringArray>("StringArray");
+
     connect (devicePoller,&DevicePoller::keyPressed,this, &LoginWindow::handleInput);
     connect (this, &LoginWindow::poll, devicePoller, &DevicePoller::doin);
     connect (&pollThread, &QThread::finished, devicePoller, &QObject::deleteLater);
@@ -65,21 +69,26 @@ LoginWindow::~LoginWindow()
     delete ui;
 }
 
-void LoginWindow::handleInput(QVector<std::string> inputs) {
-    for(QVector<string>::iterator it = inputs.begin(); it!=inputs.end(); ++it) {
+void LoginWindow::handleInput(StringArray inputs) {
+    for(std::vector<std::string>::iterator it = inputs.begin(); it!=inputs.end(); ++it) {
         if(*it == "up") {
+            keyb->up();
             std::cout << "we got in here ooh yeah" << std::endl;
         }
         else if (*it == "down") {
+            keyb->down();
             std::cout << "we got in here ooh yeah" << std::endl;
         }
         else if (*it == "left") {
+            keyb->left();
             std::cout << "we got in here ooh yeah" << std::endl;
         }
         else if (*it == "right") {
+            keyb->right();
             std::cout << "we got in here ooh yeah" << std::endl;
         }
         else if (*it == "a") {
+            keyb->select();
             std::cout << "we got in here ooh yeah" << std::endl;
         }
 

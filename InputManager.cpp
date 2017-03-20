@@ -8,6 +8,7 @@
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_hints.h>
 #include <QVector>
+#include "vectortypedef.h"
 
 
 
@@ -165,9 +166,10 @@ InputConfig* InputManager::getInputConfigByDevice(int device)
 		return mInputConfigs[device];
 }
 
-QVector<std::string> InputManager::parseEvent(const SDL_Event& ev)
+StringArray InputManager::parseEvent(const SDL_Event& ev)
 {
-    QVector<std::string> empty;
+    StringArray empty, a;
+    InputConfig* ic;
         switch(ev.type)
         {
         case SDL_JOYAXISMOTION:
@@ -191,7 +193,9 @@ QVector<std::string> InputManager::parseEvent(const SDL_Event& ev)
 
         case SDL_JOYBUTTONDOWN:
         case SDL_JOYBUTTONUP:
-            return (getInputConfigByDevice(ev.jbutton.which)->getMappedTo(Input(ev.jbutton.which, TYPE_BUTTON, ev.jbutton.button, ev.jbutton.state == SDL_PRESSED, false)));
+            ic = getInputConfigByDevice(ev.jbutton.which);
+            a = ic->getMappedTo(Input(ev.jbutton.which, TYPE_BUTTON, ev.jbutton.button, ev.jbutton.state == SDL_PRESSED, false));
+            return a;
 
         case SDL_JOYHATMOTION:
             return (getInputConfigByDevice(ev.jhat.which)->getMappedTo(Input(ev.jhat.which, TYPE_HAT, ev.jhat.hat, ev.jhat.value, false)));

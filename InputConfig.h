@@ -100,7 +100,7 @@ public:
 	bool isMappedTo(const std::string& name, Input input);
 
 	//Returns a list of names this input is mapped to.
-    QVector<std::string> getMappedTo(Input input);
+    std::vector<std::string> getMappedTo(Input input);
 
 	void loadFromXML(pugi::xml_node root);
 	void writeToXML(pugi::xml_node parent);

@@ -8,6 +8,7 @@
 #include "InputManager.h"
 #include "InputConfig.h"
 #include "QThread"
+#include "vectortypedef.h"
 
 namespace Ui {
 class LoginWindow;
@@ -44,7 +45,7 @@ signals:
 public slots:
     void charPressed(const QString &text);
     void specialPressed(int key);
-    void handleInput(QVector<std::string> inputs);
+    void handleInput(StringArray inputs);
 
 
 };

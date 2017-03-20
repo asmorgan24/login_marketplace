@@ -4,6 +4,7 @@
 #include <QObject>
 #include "QThread"
 #include <QVector>
+#include "vectortypedef.h"
 
 class DevicePoller : public QObject
 {
@@ -15,7 +16,7 @@ private:
 
 
 signals:
-   void keyPressed(QVector<std::string> keys);
+   void keyPressed(StringArray keys);
 
 public slots:
    void doin();

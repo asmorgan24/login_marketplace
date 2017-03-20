@@ -55,7 +55,7 @@ public:
 
 	InputConfig* getInputConfigByDevice(int deviceId);
 
-    QVector<std::string> parseEvent(const SDL_Event& ev);
+    std::vector<std::string> parseEvent(const SDL_Event& ev);
 };
 
 #endif
