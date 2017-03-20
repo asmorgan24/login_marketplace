@@ -44,7 +44,8 @@ LoginWindow::LoginWindow(QWidget *parent) :
     username->setPalette(palBlue);
 
 
-    QMainWindow::showFullScreen();
+//    QMainWindow::showFullScreen();
+    QMainWindow::showMaximized();
 
 
     DevicePoller *devicePoller = new DevicePoller();

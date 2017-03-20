@@ -192,7 +192,9 @@ StringArray InputManager::parseEvent(const SDL_Event& ev)
             return empty;
 
         case SDL_JOYBUTTONDOWN:
+            return empty;
         case SDL_JOYBUTTONUP:
+            // TODO revert these lines
             ic = getInputConfigByDevice(ev.jbutton.which);
             a = ic->getMappedTo(Input(ev.jbutton.which, TYPE_BUTTON, ev.jbutton.button, ev.jbutton.state == SDL_PRESSED, false));
             return a;
