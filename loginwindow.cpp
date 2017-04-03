@@ -71,26 +71,29 @@ LoginWindow::~LoginWindow()
 }
 
 void LoginWindow::handleInput(StringArray inputs) {
+    if (inputs.size() != 1) {
+        return;
+    }
     for(std::vector<std::string>::iterator it = inputs.begin(); it!=inputs.end(); ++it) {
         if(*it == "up") {
             keyb->up();
-            std::cout << "we got in here ooh yeah" << std::endl;
+            std::cout << "UP" << std::endl;
         }
         else if (*it == "down") {
             keyb->down();
-            std::cout << "we got in here ooh yeah" << std::endl;
+            std::cout << "DOWN" << std::endl;
         }
         else if (*it == "left") {
             keyb->left();
-            std::cout << "we got in here ooh yeah" << std::endl;
+            std::cout << "LEFT" << std::endl;
         }
         else if (*it == "right") {
             keyb->right();
-            std::cout << "we got in here ooh yeah" << std::endl;
+            std::cout << "RIGHT" << std::endl;
         }
         else if (*it == "a") {
             keyb->select();
-            std::cout << "we got in here ooh yeah" << std::endl;
+            std::cout << "SELECT" << std::endl;
         }
 
     }

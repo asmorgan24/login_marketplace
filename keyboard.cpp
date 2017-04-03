@@ -54,7 +54,8 @@ KeyboardLayoutEntry keyboardLayout[] = {
     { Qt::Key_B, "b" },
     { Qt::Key_N, "n" },
     { Qt::Key_M, "m" },
-    { Qt::Key_Enter, "Enter" }
+    { Qt::Key_Enter, "Enter" },
+    { NEXT_ROW_MARKER, 0 }
 };
 
 const static int layoutSize = (sizeof(keyboardLayout) / sizeof(KeyboardLayoutEntry));
@@ -90,6 +91,7 @@ Keyboard::Keyboard(QWidget *parent)
         if (keyboardLayout[i].key == NEXT_ROW_MARKER) {
             row++;
             rowLengths.push_back(column);
+            std:: cout << "Columns: " << column << std::endl;
             column = 0;
             continue;
         }
@@ -127,31 +129,35 @@ bool Keyboard::keyboardVisible() const
 
 void Keyboard::up(){
     buttonVec.at(position)->setPalette(white);
-    position = position-rowLengths.at(getRow()-1);
-    if (position < 0) {
-        position = 0;
-    }
-    buttonVec.at(position)->setPalette(blue);
 
+    std::cout << "Size of row: " << rowLengths.at(getRow()) << std::endl;
+
+    if (position > rowLengths.at(0)) {
+        position = position-rowLengths.at(getRow()-1);
+        }
+
+    buttonVec.at(position)->setPalette(blue);
+    std::cout << "New position " << position << std::endl << std::endl;
 }
 
 void Keyboard::down(){
     buttonVec.at(position)->setPalette(white);
-    position = position+rowLengths.at(getRow());
-    if (position > buttonVec.length()) {
-        position = buttonVec.length();
+    std::cout << "Size of row: " << rowLengths.at(getRow()) << std::endl;
+    if (position <= buttonVec.length()-rowLengths.at(3)) {
+        position = position+rowLengths.at(getRow());
     }
     buttonVec.at(position)->setPalette(blue);
+    std::cout << "New position " << position << std::endl << std::endl;
 
 }
 
 void Keyboard::right(){
     buttonVec.at(position)->setPalette(white);
-    position++;
-    if (position > buttonVec.length()) {
-        position = buttonVec.length();
+    if (position < buttonVec.length()-1) {
+        position++;
     }
     buttonVec.at(position)->setPalette(blue);
+    std::cout << "New position " << position << std::endl << std::endl;
 
 }
 
@@ -162,6 +168,7 @@ void Keyboard::left(){
         position = 0;
     }
     buttonVec.at(position)->setPalette(blue);
+    std::cout << "New position " << position << std::endl << std::endl;
 
 
 }
