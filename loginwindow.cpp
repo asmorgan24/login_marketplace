@@ -44,8 +44,8 @@ LoginWindow::LoginWindow(QWidget *parent) :
     username->setPalette(palBlue);
 
 
-//    QMainWindow::showFullScreen();
-    QMainWindow::showMaximized();
+    QMainWindow::showFullScreen();
+ //   QMainWindow::showMaximized();
 
 
     DevicePoller *devicePoller = new DevicePoller();
@@ -123,6 +123,8 @@ void LoginWindow::specialPressed (int key) {
     else if (key == Qt::Key_Enter && enterPressed) {
         password->setPalette(palWhite);
         password->setDisabled(true);
+        //TODO: do the processing here to see if we should call anything good.
+        std::system("~/workspace/EmulationStation-Marketplace/emulationstation");
     }
 
     if (key == Qt::Key_Backspace && !enterPressed){
